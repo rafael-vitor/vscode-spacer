@@ -12,22 +12,32 @@ export function activate(context: vscode.ExtensionContext) {
   const editor = window.activeTextEditor;
 
   const document = editor.document;
-  const parsedDoc = parse(document.getText());
 
-  parsedDoc.map(i => {
-    let msg = '', color = GREEN;
-    const values = i.matches.map(m => {
-      const value = m.value/8;
-      msg += ` ${String(value)}`;
-      if (m.value % 8 !== 0) { color = RED; }
+  workspace.onDidChangeTextDocument(ev => processActiveFile(ev.document));
+  window.onDidChangeActiveTextEditor(ev => ev && processActiveFile(ev.document));
+  if (window.activeTextEditor) {
+    processActiveFile(window.activeTextEditor.document);
+  }
+}
+
+function processActiveFile(document) {
+  if (document && document.languageId === 'scss') {
+    const parsedDoc = parse(document.getText());
+    parsedDoc.map(i => {
+      let msg = '', color = GREEN;
+      const values = i.matches.map(m => {
+        const value = m.value/8;
+        msg += ` $spacer*${String(value)}`;
+        if (m.value % 8 !== 0) { color = RED; }
+      });
+
+      decorate(
+        msg,
+        { line: i.line, fileName: document.fileName },
+        color,
+      );
     });
-
-    decorate(
-      msg,
-      { line: i.line, fileName: document.fileName },
-      color,
-    );
-  });
+  }
 }
 
 function parse(text) {
