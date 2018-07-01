@@ -28,17 +28,20 @@ function parse(text) {
       console.log(l);
       const re = /(\d+)px/g;
       let matches = [];
-      let regArr = [];
+      let regArr;
 
       while ((regArr = re.exec(l)) !== null) {
         matches.push({
           value: regArr[1],
-          index: regArr.index;
+          index: regArr.index,
         });
       }
       console.log({ matches });
 
-      return i;
+      return {
+        line: i,
+        matches,
+      };
     }
   }).filter(i => i);
 
