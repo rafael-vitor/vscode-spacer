@@ -1,6 +1,6 @@
 'use strict';
 import * as vscode from 'vscode';
-import { workspace, window, Range, Position } from 'vscode';
+import { workspace, window } from 'vscode';
 import { decorate } from './decorators';
 
 const configuration = workspace.getConfiguration('sassSpacer');
@@ -13,11 +13,7 @@ const {
   enableSensitiveColors,
 } = configuration;
 
-export function activate(context: vscode.ExtensionContext) {
-  const editor = window.activeTextEditor;
-
-  const document = editor.document;
-
+export function activate() {
   workspace.onDidChangeTextDocument(ev => processActiveFile(ev.document));
   window.onDidChangeActiveTextEditor(ev => ev && processActiveFile(ev.document));
   if (window.activeTextEditor) {
@@ -48,7 +44,6 @@ function processActiveFile(document) {
 
 function parse(text) {
   const lines = text.split('\n');
-  const numLines = lines.length;
 
   return lines.map((l, i) => {
     if (l.includes('px')) {
