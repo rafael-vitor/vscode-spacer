@@ -3,12 +3,17 @@ import * as vscode from 'vscode';
 import { workspace, window, Range, Position } from 'vscode';
 import { decorate } from './decorators';
 
-const RED = '#d44e40';
-const GREEN = '#7cc36e';
+const configuration = workspace.getConfiguration('sassSpacer');
+
+const {
+  spacer,
+  inadequateValueColor,
+  adequateValueColor,
+  neutralColor,
+  enableSensitiveColors,
+} = configuration;
 
 export function activate(context: vscode.ExtensionContext) {
-
-  console.log('Congratulations, your extension "spacer" is now active!');
   const editor = window.activeTextEditor;
 
   const document = editor.document;
@@ -24,17 +29,18 @@ function processActiveFile(document) {
   if (document && document.languageId === 'scss') {
     const parsedDoc = parse(document.getText());
     parsedDoc.map(i => {
-      let msg = '', color = GREEN;
+      let msg = '', color = adequateValueColor;
+
       const values = i.matches.map(m => {
-        const value = m.value/8;
+        const value = m.value/spacer;
         msg += ` $spacer*${String(value)}`;
-        if (m.value % 8 !== 0) { color = RED; }
+        if (m.value % spacer !== 0 && enableSensitiveColors) { color = inadequateValueColor; }
       });
 
       decorate(
         msg,
         { line: i.line, fileName: document.fileName },
-        color,
+        configuration.enableSensitiveColors ? color : neutralColor,
       );
     });
   }

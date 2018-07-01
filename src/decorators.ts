@@ -1,10 +1,8 @@
 'use strict';
-import * as vscode from 'vscode';
-import {workspace, window, Range, Position} from 'vscode';
+import { window, Range, Position } from 'vscode';
 
 const decorationType = window.createTextEditorDecorationType({after: {margin: '0 0 0 1rem'}});
 const decorations = {};
-
 
 export function decorate(text, packageInfo, color) {
   const { fileName, line } = packageInfo;
@@ -36,7 +34,4 @@ export function refreshDecorations(fileName, delay = 10) {
 
 export function getEditors(fileName) {
   return window.visibleTextEditors.filter(editor => editor.document.fileName === fileName);
-}
-
-export function deactivate() {
 }
