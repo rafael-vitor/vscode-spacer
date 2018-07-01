@@ -3,13 +3,13 @@ import * as vscode from 'vscode';
 import {workspace, window, Range, Position} from 'vscode';
 
 const decorationType = window.createTextEditorDecorationType({after: {margin: '0 0 0 1rem'}});
-const decorations = {
-  // "/Users/ravi/workspace/online-office/web/components/about/style.scss": {3: null},
-};
+const decorations = {};
 
 
 export function decorate(text, packageInfo, color) {
   const { fileName, line } = packageInfo;
+  if (!decorations[fileName]) { decorations[fileName] = {}; }
+
   console.log(`Setting Decoration: ${text}, ${JSON.stringify(packageInfo, null, 2)}`);
 
   decorations[fileName][line] = {

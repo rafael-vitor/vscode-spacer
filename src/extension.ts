@@ -1,6 +1,10 @@
 'use strict';
 import * as vscode from 'vscode';
-import {workspace, window, Range, Position} from 'vscode';
+import { workspace, window, Range, Position } from 'vscode';
+import { decorate } from './decorators';
+
+const RED = '#d44e40';
+const GREEN = '#7cc36e';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -8,24 +12,30 @@ export function activate(context: vscode.ExtensionContext) {
   const editor = window.activeTextEditor;
 
   const document = editor.document;
-  // console.log({ document });
-  parse(document.getText());
-  // const packageInfo = {
-  //   line: 3,
-  //   fileName: document.fileName,
-  // };
+  const parsedDoc = parse(document.getText());
 
-  // decorate('msg', packageInfo, '#7cc36e');
+  parsedDoc.map(i => {
+    let msg = '', color = GREEN;
+    const values = i.matches.map(m => {
+      const value = m.value/8;
+      msg += ` ${String(value)}`;
+      if (m.value % 8 !== 0) { color = RED; }
+    });
+
+    decorate(
+      msg,
+      { line: i.line, fileName: document.fileName },
+      color,
+    );
+  });
 }
 
 function parse(text) {
-  // console.log(text);
   const lines = text.split('\n');
   const numLines = lines.length;
 
-  const m = lines.map((l, i) => {
+  return lines.map((l, i) => {
     if (l.includes('px')) {
-      console.log(l);
       const re = /(\d+)px/g;
       let matches = [];
       let regArr;
@@ -36,20 +46,13 @@ function parse(text) {
           index: regArr.index,
         });
       }
-      console.log({ matches });
 
       return {
-        line: i,
+        line: i + 1,
         matches,
       };
     }
   }).filter(i => i);
-
-  console.log({
-    numLines,
-    lines,
-    m,
-  });
 }
 
 export function deactivate() {
