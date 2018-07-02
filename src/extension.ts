@@ -1,7 +1,7 @@
 'use strict';
 import * as vscode from 'vscode';
 import { workspace, window } from 'vscode';
-import { decorate } from './decorators';
+import { decorate, flushDecorations } from './decorators';
 
 const configuration = workspace.getConfiguration('sassSpacer');
 
@@ -23,6 +23,7 @@ export function activate() {
 
 function processActiveFile(document) {
   if (document && document.languageId === 'scss') {
+    flushDecorations(document.fileName);
     const parsedDoc = parse(document.getText());
     parsedDoc.map(i => {
       let msg = '', color = adequateValueColor;

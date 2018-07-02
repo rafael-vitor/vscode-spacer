@@ -4,6 +4,11 @@ import { window, Range, Position } from 'vscode';
 const decorationType = window.createTextEditorDecorationType({after: {margin: '0 0 0 1rem'}});
 const decorations = {};
 
+export function flushDecorations(fileName) {
+  decorations[fileName] = {};
+  refreshDecorations(fileName);
+}
+
 export function decorate(text, packageInfo, color) {
   const { fileName, line } = packageInfo;
   if (!decorations[fileName]) { decorations[fileName] = {}; }
