@@ -44,6 +44,11 @@
           "default": true,
           "description": "Enable different colors for when values are correct multiples of spacer variable"
         },
+        "sassSpacer.allowFactorsMultipleOf": {
+          "type": "number",
+          "default": 1,
+          "description": "With enableSensitiveColors, a factor of spacer is considered correct if it's a mutiple of this number"
+        },
         "sassSpacer.spacer": {
           "type": "number",
           "default": 8,
