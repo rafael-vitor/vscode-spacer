@@ -12,6 +12,9 @@
 
   // Enable different colors for when values are correct multiples of spacer variable
   "sassSpacer.enableSensitiveColors": true,
+  
+  // A multiple of spacer is considered correct if the quotient of division by spacer is a multiple of this number
+  "sassSpacer.allowQuotientsMultipleOf": 1,
 
   // Decoration color for adequate values
   "sassSpacer.adequateValueColor": "#a3ea9d",

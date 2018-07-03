@@ -44,6 +44,11 @@
           "default": true,
           "description": "Enable different colors for when values are correct multiples of spacer variable"
         },
+        "sassSpacer.allowQuotientsMultipleOf": {
+          "type": "number",
+          "default": 1,
+          "description": "A multiple of spacer is considered correct if the quotient of division by spacer is a multiple of this number"
+        },
         "sassSpacer.spacer": {
           "type": "number",
           "default": 8,
