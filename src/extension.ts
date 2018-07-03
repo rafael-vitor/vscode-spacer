@@ -11,7 +11,7 @@ const {
   adequateValueColor,
   neutralColor,
   enableSensitiveColors,
-  allowMultiplesOf,
+  allowQuotientsMultipleOf,
 } = configuration;
 
 export function activate() {
@@ -32,7 +32,7 @@ function processActiveFile(document) {
       const values = i.matches.map(m => {
         const value = m.value/spacer;
         msg += ` $spacer*${String(value)}`;
-        if (m.value % allowMultiplesOf !== 0 && enableSensitiveColors) { color = inadequateValueColor; }
+        if (m.value % allowQuotientsMultipleOf !== 0 && enableSensitiveColors) { color = inadequateValueColor; }
       });
 
       decorate(
