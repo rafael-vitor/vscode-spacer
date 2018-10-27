@@ -1,0 +1,78 @@
+{
+  "name": "spacer",
+  "displayName": "spacer",
+  "description": "",
+  "version": "0.0.2",
+  "publisher": "r4v1",
+  "engines": {
+    "vscode": "^1.24.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:scss"
+  ],
+  "keywords": [
+    "sass",
+    "scss",
+    "spacer"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "spacer configuration",
+      "properties": {
+        "sassSpacer.inadequateValueColor": {
+          "type": "string",
+          "default": "#d44e40",
+          "description": "Decoration color for inadequate values"
+        },
+        "sassSpacer.adequateValueColor": {
+          "type": "string",
+          "default": "#a3ea9d",
+          "description": "Decoration color for adequate values"
+        },
+        "sassSpacer.neutralColor": {
+          "type": "string",
+          "default": "#7a868e",
+          "description": "Neutral Decoration color"
+        },
+        "sassSpacer.enableSensitiveColors": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable different colors for when values are correct multiples of spacer variable"
+        },
+        "sassSpacer.allowQuotientsMultipleOf": {
+          "type": "number",
+          "default": 1,
+          "description": "A multiple of spacer is considered correct if the quotient of division by spacer is a multiple of this number"
+        },
+        "sassSpacer.spacer": {
+          "type": "number",
+          "default": 8,
+          "description": "Spacer variable value"
+        }
+      }
+    }
+  },
+    "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6",
+    "tslint": "^5.8.0",
+    "@types/node": "^7.0.43",
+    "@types/mocha": "^2.2.42"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rafael-vitor/vscode-spacer.git"
+  }
+}

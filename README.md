@@ -16,7 +16,7 @@
    2. Click on left menu's debug icon
    3. Start the debug, on the green play icon
 
-   This will open a new vscode instance with the exetension loaded
+  This should open a new vscode instance with `sass-spacer` loaded
 
 
 ### configuration
