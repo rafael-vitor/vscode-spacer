@@ -2,7 +2,7 @@
 
 ![Example Image](https://media.giphy.com/media/BpamyEAIa6SxxNggKT/giphy.gif)
 
-## Getting Started
+## How to run
 
   First install the dependencies:
 
