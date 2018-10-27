@@ -2,6 +2,22 @@
 
 ![Example Image](https://media.giphy.com/media/BpamyEAIa6SxxNggKT/giphy.gif)
 
+## Getting Started
+
+  First install the dependencies:
+
+  ```javascript
+    npm install
+  ```
+
+  Loading `sass-spacer`:
+
+   1. Open vscode
+   2. Click on left menu's debug icon
+   3. Start the debug, on the green play icon
+
+   This will open a new vscode instance with the exetension loaded
+
 
 ### configuration
 
@@ -12,7 +28,7 @@
 
   // Enable different colors for when values are correct multiples of spacer variable
   "sassSpacer.enableSensitiveColors": true,
-  
+
   // A multiple of spacer is considered correct if the quotient of division by spacer is a multiple of this number
   "sassSpacer.allowQuotientsMultipleOf": 1,
 
